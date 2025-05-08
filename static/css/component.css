@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Spinnaker&display=swap');
+
+:root{
+    --font_family: "Poppins", sans-serif;
+
+    --primary: #127C56;
+    --secondary: #EAB64D;
+    --background: #1F3C3B;
+
+    --red: #EA4D4D;
+    --darkred: #7C1214;
+
+    --gray: #323232;
+    --lightgray: #EDEDED;
+    
+    --green: #4DEA5F;
+    --darkgreen: #127C56;
+    --black: #000000;
+    --white: #FFFFFF;
+    
+    --header_32px: 32px;
+    --header_24px: 24px;
+    --header_20px: 20px;
+    --header_18px: 18px;
+
+    --normal_16px: 16px;
+    --normal_14px: 14px;
+    --normal_12px: 12px;
+    --normal_10px: 10px;
+    --normal_8px: 8px;
+    --normal_6px: 6px;
+}
+
+.nanum{
+    font-size: 98px;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-family: "Nanum Pen Script", cursive !important;
+}
+
+.spinnaker {
+    font-family: "Spinnaker", sans-seri !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+}
+
+h1{
+    text-transform: capitalize;
+}
+
+.tags{
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: 64px;
+    border: 1px solid var(--black);
+}
+
+.links {
+    font-weight: 500;
+    color: var(--black);
+    text-decoration: none;
+}
+
+.links:hover{
+    color: var(--primary);
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], select, textarea, input[type="time"], input[type="file"], input[type="date"]{
+    width: 100%;
+    cursor: text !important;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    font-family: var(--font_family);
+}
+
+textarea, select, input[type="time"]{
+    cursor: pointer;
+    resize: vertical;
+}
+
+textarea{
+    max-height: 100px;
+}
+
+/* Icon */
+.icon{
+    cursor: pointer;
+}
+
+.icon-small{
+    width: 16px;
+    height: 16px;
+}
+
+.icon-medium{
+    width: 24px;
+    height: 24px;
+}
+
+.icon-large{
+    width: 42px;
+    height: 42px;
+}
+
+/* Buttons */
+.button-xsmall{
+    text-align: center;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    padding: 10px 6px;
+    gap: 6px;
+    font-size: 14px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    border: solid 1px var(--black);
+}
+
+.button-small{
+    text-align: center;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    padding: 12px 8px;
+    gap: 6px;
+    font-size: 16px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    border: solid 1px var(--black);
+}
+
+.button-small-long{
+    text-align: center;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    padding: 12px 18px;
+    gap: 6px;
+    font-size: 16px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    border: solid 1px var(--black);
+}
+
+.button{
+    text-align: center;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    padding: 16px;
+    gap: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    letter-spacing: 1px;
+    border: solid 1px var(--black);
+}
+
+
+.button-disabled{
+    cursor: not-allowed;
+    color: var(--white);
+    pointer-events: none;
+    border-color: var(--white);
+    background-color: var(--gray);
+}
+
+.button-clrprimary{
+    cursor: pointer;
+    color: var(--white);
+    border-color: var(--white);
+    background-color: var(--primary);
+}
+
+.button-clrprimary:hover{
+    cursor: pointer;
+    color: var(--white);
+    border-color: var(--white);
+    background-color: var(--primary);
+}
+
+.button-clrbackground{
+    cursor: pointer;
+    color: var(--white);
+    border-color: var(--white);
+    background-color: var(--background);
+}
+
+.button-clrbackground:hover{
+    color: var(--white);
+    border-color: var(--white);
+    background-color: var(--primary);
+}
+
+.button-clrprimary-wimg{
+    display: flex;
+    cursor: pointer;
+    flex-direction: row;
+    align-items: center;
+    color: var(--white);
+    border-color: var(--white);
+    background-color: var(--primary);
+}
+
+.button-clrprimary-wimg img{
+    width: 20px;
+    height: auto;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+}
+
+.button-clrprimary-wimg:hover {
+    color: var(--white);
+    border-color: var(--white);
+    background-color: var(--secondary);
+}
+
+.button-clrprimary-wimg:hover img{
+    width: 20px;
+    height: auto;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+}
+
+.button-red{
+    background-color: var(--red) !important;
+}
+
+.button-red:hover{
+    background-color:  var(--darkred) !important;
+}
+
+.delt-w, .edit-w, .view-w{
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(108deg) brightness(104%) contrast(104%);
+}
+
+/* Icons Color */
+.notif:hover{
+    filter: brightness(0) saturate(100%) invert(35%) sepia(80%) saturate(435%) hue-rotate(107deg) brightness(92%) contrast(92%) !important;
+}
+
+.delt:hover{
+    filter: brightness(0) saturate(100%) invert(57%) sepia(73%) saturate(4321%) hue-rotate(330deg) brightness(95%) contrast(92%) !important;
+}
+
+.edit:hover{
+    filter: brightness(0) saturate(100%) invert(59%) sepia(22%) saturate(2206%) hue-rotate(184deg) brightness(96%) contrast(91%) !important;
+}
+
+.view:hover{
+    filter: brightness(0) saturate(100%) invert(96%) sepia(32%) saturate(3787%) hue-rotate(318deg) brightness(98%) contrast(87%) !important;
+}
+
+/* messages */
+.pop-up-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    animation: slideIn 0.5s ease-out forwards;
+    max-width: 300px;
+}
+
+.pop-up-message.slide-out {
+    animation: slideOut 0.5s ease-in forwards;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+
+.pop-up-message p {
+    padding: 15px 25px;
+    margin: 10px 0;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.pop-up-message .close-btn {
+    cursor: pointer;
+    margin-left: 15px;
+    font-size: 20px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.pop-up-message .close-btn:hover {
+    opacity: 1;
+}
+
+.message-success { background: #28a745; }
+.message-info { background: #17a2b8; }
+.message-warning { background: #ffc107; color: #000; }
+.message-error { background: #dc3545; }

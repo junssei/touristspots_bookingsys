@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %} {% endblock %} </title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="{% static 'main-responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'touristspot.css' %}">
+</head>
+<body>
+    {% include 'message.html' %}
+    <div class="header-container container">
+        <div class="header-logo">
+            <a href="{% url 'main' %}"><img src="{% static 'images/logo/logo=booking-def.svg' %}" alt="Logo" class="logo"></a>
+        </div>
+        {% url 'main' as home %}
+        {% url 'touristspots' as explore %}
+        {% url 'aboutus' as aboutus %}
+        {% url 'contact' as contact %}
+        <div class="header-navigation">
+            <a href="{% url 'main' %}" class="{% if request.path == home %} active {% endif %}"><span> Home </span></a>
+            <a href="{% url 'touristspots' %}" class="{% if request.path == explore %} active {% endif %}"><span> Explore Spots </span></a>
+            <a href="{% url 'aboutus' %}" class="{% if request.path == aboutus %} active {% endif %}"><span> About us </span></a>
+            <a href="{% url 'contact' %}" class="{% if request.path == contact %} active {% endif %}"><span> Contact </span></a>
+        </div>
+        <div class="header-actions">
+            {% if not user.is_authenticated %}
+            <a href="{% url 'login' %}" class="button-small button-clrprimary">Login</a>
+            {% else %}
+            <div class="users-container">
+                <img src="{% static 'icon/icons=bell.svg' %}" alt="notification" class="notification icon notif" id="notification">
+                <div class="user-profile">
+                    {% if request.user.image.url != null %}
+                    <img src="{{ request.user.image.url }}" class="profile-image">
+                    {% else %}
+                    <img src="/media/profiles/default-profile.jpeg" class="profile-image">
+                    {% endif %}
+                    <div class="profile-name">
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% block content %} {% endblock %}
+    {% block script %}
+    {% endblock %}
+    <script src="{% static 'admin/admin-script.js' %}"></script>
+</body>
+</html>

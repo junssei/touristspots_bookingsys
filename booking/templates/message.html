@@ -1,0 +1,15 @@
+{% if messages %}
+<div class="pop-up-message">
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <p class="message-success">{{ message }}</p>
+        {% elif message.tags == 'info' %}
+            <p class="message-info">{{ message }}</p>
+        {% elif message.tags == 'warning' %}
+            <p class="message-warning">{{ message }}</p>
+        {% elif message.tags == 'error' %}
+            <p class="message-error">{{ message }}</p>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endif %}

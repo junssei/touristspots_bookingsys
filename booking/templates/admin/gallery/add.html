@@ -1,0 +1,79 @@
+{% extends 'admin/master-admin.html' %}
+{% load static %}
+
+{% block title %} {{ action }} {{ title }} - Admin {% endblock %}
+{% block content %}
+<div class="content_header">
+    <h1> {{ action }} {{ title }} </h1>
+    <a href="{% url 'spot' %}" class="button-small-long button-clrprimary-wimg button-red"><img src="{% static 'icon/action-icons=back-01.svg' %}"><span> Back </span></a>
+</div>
+<div class="content_body">
+    <form action="" class="form-container" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="createdby" value="{{ request.user.id }}">
+        <div class="input-group">
+            <div class="input-container-select">
+                {{ form.is_approved }} <label for="id_is_approved"> Approval Status </label>
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="id_spotname">Spot Name</label>
+            <div class="input-container">
+                {{ form.spotname }}
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="id_address">Address</label>
+            <div class="input-container">
+                {{ form.address }}
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="id_description">Description</label>
+            <div class="input-container">
+                {{ form.description }}
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="id_entrancefee">Entrance Fee</label>
+            <div class="input-container">
+                {{ form.entrancefee }}
+            </div>
+        </div>
+        <div class="input-group input-group-row">
+            <div class="input-group">
+                <label for="id_openingday">Opening Day</label>
+                <div class="input-container">
+                    {{ form.openingday }}
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="id_openinghours">Opening Hours</label>
+                <div class="input-container">
+                    {{ form.openinghours }}
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="id_category">Category</label>
+                <div class="input-container">
+                    {{ form.category }}
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="id_image">Image</label>
+                <div class="input-container">
+                    {{ form.image }}
+                </div>
+            </div>
+        </div>
+        <button class="button button-clrbackground"> Create {{ title }} </button>
+    </form>
+    {% if form.non_field_errors %}
+        <div class="error-message">
+            {% for error in form.non_field_errors %}
+                <p style="color: red;">{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

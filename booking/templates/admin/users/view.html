@@ -1,0 +1,72 @@
+{% extends 'admin/master-admin.html' %}
+{% load static %}
+
+{% block title %} Tourist Spot - Admin {% endblock %}
+{% block content %}
+<div class="content_header">
+    <h1> {{ list.username }}'s Profile </h1>
+    <a href="{% url 'users' %}" class="button-small-long button-clrprimary-wimg button-red"><img src="{% static 'icon/action-icons=back-01.svg' %}"><span> Back </span></a>
+</div>
+<div class="content_body">
+    <div class="info-container">
+        <div class="profile-section">
+            {% if list.image.url != null %}
+            <img src="{{ list.image.url }}" class="profile-img">
+            {% else %}
+            <img src="/media/profiles/default-profile.jpeg" class="profile-img">
+            {% endif %}
+            <div class="profile-desc">
+                <div class="profile-usertags">
+                    {% if list.is_tourguide %}
+                        <a class="roletags tags"> Tour Guide </a>
+                    {% endif %}
+                    {% if list.is_staff %}
+                        <a class="roletags tags"> Admin </a>
+                    {% endif %}
+                    {% if not list.is_staff %}
+                        <a class="roletags tags"> Tourist </a>
+                    {% endif %}
+                </div>
+                <p> Registered Date: {{ list.registration_date }} </p>
+            </div>
+        </div>
+        <div class="details-section">
+            <div class="form-container">
+                <div class="input-group">
+                    <label for="first_name">First Name: </label>
+                    <div class="input-container">
+                        <input type="text" name="first_name" value="{{ list.first_name }}" disabled>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="last_name">Last Name: </label>
+                    <div class="input-container">
+                        <input type="text" name="last_name" value="{{ list.last_name }}" disabled>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email Address: </label>
+                    <div class="input-container">
+                        <input type="email" name="email" value="{{ list.email }}" disabled>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="phone">Phone Number: </label>
+                    <div class="input-container">
+                        <input type="number" name="phone" value="{{ list.phone }}" disabled>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="address">Address: </label>
+                    <div class="input-container">
+                        <input type="text" name="address" value="{{ list.address }}" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="details-action">
+                <a href="{% url 'edit_user' list.id %}" class="button-small-long button-clrprimary-wimg"><img src="{% static 'icon/action-icons=edit-01.svg' %}"><span> Edit </span></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

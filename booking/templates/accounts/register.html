@@ -1,0 +1,130 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Register | TourSpot </title>
+    <link rel="stylesheet" href="{% static 'login_register.css' %}">
+</head>
+<body>
+    {% include 'message.html' %}
+    <div class="login-register-container">
+        <div class="left-container container" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.60) 100%), url(../../static/images/bg2.jpeg) lightgray -769.631px 0px / 224.03% 100% no-repeat; background-size: cover; background-position: center;">
+            <div class="logo-container">
+                <img src="{% static 'images/logo/logo=booking-def.svg' %}" alt="Logo" class="logo">
+                <a href="/" class="home-btn button"><img src="{% static 'images/icon/icons=home-02.svg' %}" alt=""><span> Home </span></a>
+            </div>
+        </div>
+        <div class="right-container container">
+            <div id="descriptions">
+                <div class="header-actions-container">
+                    <a href="/" class="header-actions links"> < Home </a>
+                </div>
+                <p class="descriptions-header"> Explore the Philippines Like Never Before! </p>
+                <p class="descriptions-content"> Create Your Account to Book Hidden Gems & Iconic Destinations. Join thousands of travelers discovering the best of the Philippines....! See more & Benefits. </p>
+            </div>
+            <form action="" class="login-register-form" method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="username"> Username </label>
+                    <div class="input-container">
+                        {{ form.username }}
+                    </div>
+                </div>
+                {% if form.username.errors %}
+                    <div class="error-message">{{ form.username.errors }}</div>
+                {% endif %}
+                <div class="input-group">
+                    <label for="email"> Email </label>
+                    <div class="input-container">
+                        {{ form.email }}
+                    </div>
+                </div>
+                {% if form.email.errors %}
+                    <div class="error-message">{{ form.email.errors }}</div>
+                {% endif %}
+                <div class="input-group">
+                    <label for="password"> Password </label>
+                    <div class="input-container">
+                        {{ form.password1 }}
+                        <img src="{% static 'images/icon/eye-closed.svg' %}" id="password-eyecon" class="password-eyecon icon-medium" onclick="passwordToggle()">
+                    </div>
+                </div>
+                {% if form.password1.errors %}
+                    <div class="error-message">
+                        {% for error in form.password1.errors %}
+                            <p style="color: red;">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="input-group">
+                    <label for="password2"> Confirm Password </label>
+                    <div class="input-container">
+                        {{ form.password2 }}
+                        <img src="{% static 'images/icon/eye-closed.svg' %}" id="confirm-password-eyecon" class="password-eyecon icon-medium" onclick="confirmPasswordToggle()">
+                    </div>
+                </div>
+                {% if form.password2.errors %}
+                    <div class="error-message">
+                        {% for error in form.password2.errors %}
+                            <p style="color: red;">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="input-group">
+                    <label for="first_name"> First Name </label>
+                    <div class="input-container">
+                        {{ form.first_name }}
+                    </div>
+                </div>
+                {% if form.first_name.errors %}
+                    <div class="error-message">{{ form.first_name.errors }}</div>
+                {% endif %}
+                <div class="input-group">
+                    <label for="last_name"> Last Name </label>
+                    <div class="input-container">
+                        {{ form.last_name }}
+                    </div>
+                </div>
+                {% if form.last_name.errors %}
+                    <div class="error-message">{{ form.last_name.errors }}</div>
+                {% endif %}
+                <div class="input-group">
+                    <label for="phone_number"> Phone Number </label>
+                    <div class="input-container">
+                        {{ form.phone_number }}
+                    </div>
+                </div>
+                {% if form.phone_number.errors %}
+                    <div class="error-message">{{ form.phone_number.errors }}</div>
+                {% endif %}
+                <div class="input-group">
+                    <label for="address"> Address </label>
+                    <div class="input-container">
+                        {{ form.address }}
+                    </div>
+                </div>
+                {% if form.address.errors %}
+                    <div class="error-message">{{ form.address.errors }}</div>
+                {% endif %}
+
+                <p align="justify"> By creating an account, you agree our <a href="" class="links"> Terms of Service </a> and <a href="" class="links"> Privacy Policy </a>.</p>
+                
+                <!-- <input type="submit" class="button button-clrbackground" value="Register - Start your journey"> -->
+                <button class="button button-clrbackground"> Register - Start your journey </button>
+            </form>
+            {% if form.non_field_errors %}
+                <div class="error-message">
+                    {% for error in form.non_field_errors %}
+                        <p style="color: red;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <p align="center"> Already have an account? <a href="login" class="links"> Login </a></p>
+        </div>
+    </div>
+</body>
+<script src="{% static 'javascript/login_register.js' %}"></script>
+</html>

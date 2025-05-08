@@ -1,0 +1,88 @@
+{% extends 'admin/master-admin.html' %}
+{% load static %}
+
+{% block title %} Tourist Spot - Admin {% endblock %}
+{% block content %}
+<div class="content_header">
+    <h1> {{ list.spotname }}'s Spots </h1>
+    <a href="{% url 'spot' %}" class="button-small-long button-clrprimary-wimg button-red"><img src="{% static 'icon/action-icons=back-01.svg' %}"><span> Back </span></a>
+</div>
+<div class="content_body">
+    <div class="info-container">
+        <div class="profile-section">
+            {% if list.image.url != null %}
+            <a href="{{ list.image.url }}">
+            <img src="{{ list.image.url }}" class="profile-img">
+            </a>
+            {% else %}
+            <img src="/media/spots/default-image.jpeg" class="profile-img">
+            {% endif %}
+            <div class="profile-desc">
+                <!--  -->
+            </div>
+        </div>
+        <div class="details-section">
+            <div class="form-container">
+                <div class="input-group">
+                    <label for="id_is_approved">Approval Status:</label>
+                    <div class="input-container">
+                        <input type="text" name="is_approved" id="id_is_approved" value="{% if list.is_approved %}Approved{% else %}Not Approved{% endif %}" disabled>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="id_spotname">Spot Name:</label>
+                    <div class="input-container">
+                        <input type="text" name="spotname" id="id_spotname" value="{{ list.spotname }}" disabled>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="id_address">Address:</label>
+                    <div class="input-container">
+                        <input type="text" name="address" id="id_address" value="{{ list.address }}" disabled>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="id_description">Description:</label>
+                    <div class="input-container">
+                        <textarea name="description" cols="40" rows="10" placeholder="Enter description " required="" id="id_description" style="height: 308px;" disabled>{{ list.description }}
+                        </textarea>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="id_entrancefee">Entrance Fee:</label>
+                    <div class="input-container">
+                        <input type="text" name="entrancefee" id="id_entrancefee" value="{{ list.entrancefee }}" disabled>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="id_openingday">Opening Day:</label>
+                    <div class="input-container">
+                        <input type="text" name="openingday" id="id_openingday" value="{{ list.openingday }}" disabled>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="id_openinghours">Opening Hours:</label>
+                    <div class="input-container">
+                        <input type="text" name="openinghours" id="id_openinghours" value="{{ list.openinghours }}" disabled>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="id_category">Category:</label>
+                    <div class="input-container">
+                        <input type="text" name="category" id="id_category" value="{{ list.category }}" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="details-action">
+                <a href="{% url 'edit_spot' list.id %}" class="button-small-long button-clrprimary-wimg"><img src="{% static 'icon/action-icons=edit-01.svg' %}"><span> Edit </span></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

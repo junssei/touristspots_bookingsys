@@ -1,0 +1,61 @@
+{% extends 'admin/master-admin.html' %}
+{% load static %}
+{% block title %} Tourist Spot - Admin {% endblock %}
+
+{% block content %}
+<div class="content_header">
+    <h1> Manage {{ title }}s </h1>
+    <a href="{% url 'add_user' %}" class="button-small-long button-clrprimary-wimg"><img src="{% static 'icon/icons=plus.svg' %}"><span> Add {{ title }} </span></a>
+</div>
+<div class="content_body">
+    <div class="table-container">
+        <h2> All Users </h2>
+        <table class="main-table table">
+            <thead>
+                <tr> 
+                    <th scope="col"> Username </th>
+                    <th scope="col"> Status </th>
+                    <th scope="col"> Email Address </th>
+                    <th scope="col"> Role </th>
+                    <th scope="col"> </th> <!-- Actions-->
+                </tr>
+            </thead>
+            <tbody>
+                {% for y in list %}
+                <tr>
+                    <td> {{ y.username }} </td>
+                    <td style="text-align: center;">
+                        {% if y.is_active == True %}
+                        <img src="{% static 'icon/icons=active.svg' %}" class="icon-small" alt="">
+                        {% else %}
+                        <img src="{% static 'icon/icons=inactive.svg' %}" class="icon-small" alt="">
+                        {% endif %}
+                    </td>
+                    <td> {{ y.email }} </td>
+                    <td>
+                        {% if y.is_staff == True %}
+                            {% if y.is_superuser == True %}
+                            Super Admin,
+                            {% else %}
+                            Admin,
+                            {% endif %}
+                        {% else %} 
+                            Tourist,
+                        {% endif %}
+                        
+                        {% if y.is_tourguide == True %}
+                            Tour Guide,
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="view" href="{% url 'view_user' y.id %}"><img src="{% static 'icon/action-icons=viewinfo.svg' %}" alt=""></a>
+                        <a class="edit" href="{% url 'edit_user' y.id %}"><img src="{% static 'icon/action-icons=edit-01.svg' %}" alt=""></a>
+                        <a class="delt" href="{% url 'delete_user' y.id %}"><img src="{% static 'icon/action-icons=trash-01.svg' %}"></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

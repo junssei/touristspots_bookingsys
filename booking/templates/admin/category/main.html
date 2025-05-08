@@ -1,0 +1,38 @@
+{% extends 'admin/master-admin.html' %}
+{% load static %}
+{% block title %} {{ title }} - Admin {% endblock %}
+
+{% block content %}
+<div class="content_header">
+    <h1> Manage {{ title }} </h1>
+    <a href="{% url 'add_category' %}" class="button-small-long button-clrprimary-wimg"><img src="{% static 'icon/icons=plus.svg' %}"><span> Add {{ subtitle }} </span></a>
+</div>
+<div class="content_body">
+    <div class="table-container">
+        <h2> All {{ title }} </h2>
+        <table class="main-table table">
+            <thead>
+                <tr> 
+                    {% for x in fields %}
+                    <th scope="col"> {{ x }} </th>
+                    {% endfor %}
+                    <th scope="col"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for y in list %}
+                <tr>
+                    <td> {{y.name}} </td>
+                    <td> {{y.parent}} </td>
+                    <td>
+                        <a class="view" href="{% url 'view_category' y.id %}"><img src="{% static 'icon/action-icons=viewinfo.svg' %}" alt=""></a>
+                        <a class="edit" href="{% url 'edit_category' y.id %}"><img src="{% static 'icon/action-icons=edit-01.svg' %}" alt=""></a>
+                        <a class="delt" href="{% url 'delete_category' y.id %}"><img src="{% static 'icon/action-icons=trash-01.svg' %}"></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

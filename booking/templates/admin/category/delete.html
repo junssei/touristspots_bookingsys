@@ -1,0 +1,39 @@
+{% extends 'admin/master-admin.html' %}
+{% load static %}
+
+{% block title %} {{ action }} {{ title }} - Admin {% endblock %}
+{% block content %}
+<div class="content_header">
+    <h1> Category: {{ list.name }} </h1>
+    <a href="{% url 'category' %}" class="button-small-long button-clrprimary-wimg button-red"><img src="{% static 'icon/action-icons=back-01.svg' %}"><span> Back </span></a>
+</div>
+<div class="content_body">
+    <div class="info-container">
+        <div class="details-section">
+            <div class="form-container">
+                <div class="input-group">
+                    <label for="name">Category Name: </label>
+                    <div class="input-container">
+                        <input type="text" name="name" value="{{ list.name }}" disabled>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="parent">Parent Category: </label>
+                    <div class="input-container">
+                        <input type="text" name="parent" value="{{ list.parent }}" disabled>
+                    </div>
+                </div>
+            </div>
+            <div class="details-action">
+                <span>
+                    Are you sure you want to delete?
+                </span>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <button class="button-small-long button-clrprimary-wimg button-red"><img src="{% static 'icon/action-icons=trash-01.svg' %}"><span> Confirm Delete </span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

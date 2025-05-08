@@ -1,0 +1,39 @@
+{% extends 'admin/master-admin.html' %}
+{% load static %}
+
+{% block title %} {{ action }} {{ title }} - Admin {% endblock %}
+{% block content %}
+<div class="content_header">
+    <h1> {{ action }} {{ list.name }} {{ title }} </h1>
+    <a href="{% url 'category' %}" class="button-small-long button-clrprimary-wimg button-red"><img src="{% static 'icon/action-icons=back-01.svg' %}"><span> Back </span></a>
+</div>
+<div class="content_body">
+    <form class="info-container" action="" class="form-container" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="details-section">
+            <div class="form-container">
+                <div class="input-group">
+                    <label for="name"> Category Name </label>
+                    <div class="input-container">
+                        {{ form.name }}
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="parent"> Parent Category </label>
+                    <div class="input-container">
+                        {{ form.parent }}
+                    </div>
+                </div>
+                <button class="button button-clrbackground"> Update {{ title }} </button>
+            </div>
+        </div>
+    </form>
+    {% if form.non_field_errors %}
+        <div class="error-message">
+            {% for error in form.non_field_errors %}
+                <p style="color: red;">{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

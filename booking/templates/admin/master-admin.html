@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'component.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/admin-style.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/admin-responsive.css' %}">
+    
+    <title> {% block title %} {% endblock %} </title>
+</head>
+<body>
+    <div class="admin-container">
+        {% include '../message.html' %}
+        <div class="sidebar-container container" id="sidebar-container">
+            <div class="logo-container">
+                <img src="{% static 'logo/logo=admin-def.svg' %}" alt="Logo" class="logo">
+                <img src="{% static 'icon/action-icons=dropleft.svg' %}" class="menu icon view" id="sidebar-menu">
+            </div>
+            <div class="navigation-container">
+                <div class="top-navgroup navgroup">
+                    <a href="{% url 'admin_dashboard' %}" class="nav-link {% if request.path == '/ts-admin' %} link-active {% endif %}"><img src="{% static 'icon/icons=home-02.svg' %}" alt="icon"><span> Home </span></a>
+                    <div class="linkgroup"> <!-- link group -->
+                        {% url 'spot' as touristspot %}
+                        {% url 'category' as categories %}
+                        {% url 'pending_spot' as pending %}
+                        <a href="{% url 'spot' %}" class="nav-link {% if request.path == touristspot or request.path == categories or request.path == pending %} link-active {% endif %}"><img src="{% static 'icon/icons=umbrella.svg' %}" alt="icon"><span> Tourist Spot </span></a>
+                        {% if request.path == touristspot or request.path == categories or request.path == pending %}
+                            <div class="subnavgroup">
+                                <a href="{% url 'category' %}" class="subnav-link {% if request.path == categories %} sublink-active {% endif %}"><span> > Category </span></a>
+                                <a href="{% url 'pending_spot' %}" class="subnav-link {% if request.path == pending %} sublink-active {% endif %}"><span> > Pending </span></a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% url 'booking' as booking %}
+                    <a href="{% url 'booking' %}" class="nav-link {% if request.path == booking %} link-active {% endif %}"><img src="{% static 'icon/icons=book-03.svg' %}" alt="icon"><span> Bookings </span></a>
+                    {% url 'users' as user %}
+                    <a href="{% url 'users' %}" class="nav-link {% if request.path == user %} link-active {% endif %}"><img src="{% static 'icon/icons=user-profile-group.svg' %}" alt="icon"><span> Users </span></a>
+                    <a href="" class="nav-link {% if request.path == '/ts-admin/gallery' %} link-active {% endif %}"><img src="{% static 'icon/icons=gallery.svg' %}" alt="icon"><span> Gallery </span></a>
+                    <a href="" class="nav-link {% if request.path == '/ts-admin/review&ratings' %} link-active {% endif %}"><img src="{% static 'icon/icons=bar-chart-square-down-01.svg' %}" alt="icon"><span> Review & Ratings </span></a>
+                </div>
+                <div class="bottom-navgroup navgroup">
+                    <a href="" class="nav-link"><img src="{% static 'icon/icons=settings.svg' %}" alt="icon"><span> Settings </span></a>
+                    <a href="{% url 'logout' %}" class="nav-link"><img src="{% static 'icon/action-icons=logout-01.svg' %}" alt="icon"><span> Logout </span></a>
+                </div>
+            </div>
+        </div>
+        <div class="content-container container">
+            <div class="header">
+                <div class="actions-container">
+                    <img src="{% static 'icon/icons=menu.svg' %}" class="menu icon view" id="header-menu">
+                </div>
+                <div class="users-container">
+                    <img src="{% static 'icon/icons=bell.svg' %}" alt="notification" class="notification icon view" id="notification">
+                    <div class="user-profile">
+                        {% if request.user.image.url != null %}
+                        <img src="{{ request.user.image.url }}" class="profile-image">
+                        {% else %}
+                        <img src="/media/profiles/default-profile.jpeg" class="profile-image">
+                        {% endif %}
+                        <div class="profile-name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                {% block content %} {% endblock %}
+            </div>
+        </div>
+    </div>
+    {% block script %} 
+    {% endblock %}
+    <script src="{% static 'admin/admin-script.js' %}"></script>
+</body>
+</html>

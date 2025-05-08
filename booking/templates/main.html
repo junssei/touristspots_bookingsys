@@ -1,0 +1,40 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %} TourSpot {% endblock %}
+
+{% block content %}
+    <div class="hero_section section">
+        <div class="hero_content section_content">
+            <p class="content_header"><span class="content_highlight"> Where to Next? </span> Let’s Plan Your Philippine Escape!</p>
+            <p class="content_subtitle">Your one-stop solcoution for booking amazing tours and spots.</p>
+        </div>
+        <form action="" class="searchspots-container" method="get">
+            <div class="input-group">
+                <label for=""> Where </label>
+                <div class="input-container">
+                    <input type="text" placeholder="Search for spots">
+                </div>
+            </div>
+            <div class="input-group">
+                <label for=""> Add Dates </label>
+                <div class="input-container">
+                    <input type="date" placeholder="Add Dates">
+                </div>
+            </div>
+            <div class="input-group">
+                <label for=""> Price </label>
+                <div class="input-container">
+                    <input type="text" placeholder="Prices">
+                </div>
+            </div>
+            <button class="button-small-long button-clrprimary-wimg"><img src="{% static 'icon/action-icons=search.svg' %}"></button>
+        </form>
+    </div>
+    <div class="popular_section section">
+        <div class="popular_content section_content">
+            <p class="content_header"><span class="content_highlight"> Where to Next? </span> Let’s Plan Your Philippine Escape!</p>
+            <p class="content_subtitle">Your one-stop solcoution for booking amazing tours and spots.</p>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'admin/master-admin.html' %}
+{% load static %}
+{% block title %} {{ title }} - Admin {% endblock %}
+
+{% block content %}
+<div class="content_header">
+    <h1> Manage {{ title }} </h1>
+    <a href="{% url 'add_spot' %}" class="button-small-long button-clrprimary-wimg"><img src="{% static 'icon/icons=plus.svg' %}"><span> Add {{ subtitle }} </span></a>
+</div>
+<div class="content_body">
+    <div class="imagecard-groupcontainer">
+        {% for y in list %}
+        <div class="card">
+            <div class="imagecard-imagearea">
+                {% if y.image.url != null %}
+                    <img src="{{ y.image.url }}" class="image" alt="image-card">
+                {% else %}
+                    <img src="/media/spots/default-image.jpeg" class="image" alt="image-card">
+                {% endif %}
+                <div class="action-buttons">
+                    <a class="view view-w" href="{% url 'view_spot' y.id %}"><img src="{% static 'icon/action-icons=viewinfo.svg' %}" alt=""></a>
+                    <a class="edit edit-w" href="{% url 'edit_spot' y.id %}"><img src="{% static 'icon/action-icons=edit-01.svg' %}" alt=""></a>
+                    <a class="delt delt-w" href="{% url 'delete_spot' y.id %}"><img src="{% static 'icon/action-icons=trash-01.svg' %}"></a>
+                </div>
+            </div>
+            <div class="imagecard-details">
+                <div class="details-header">
+                    <h1 class="main-header"> {{ y.spotname }} </h1>
+                    <h4 class="sub-header"> {{ y.address }} </h4>
+                </div>
+                <div class="details-content">
+                    <p class="description"> {{ y.description }} </p>
+                </div>
+                <div class="details-footer">
+                    <div class="price">
+                        <h4> Entrance Fee </h4>
+                        <p> ₱{{y.entrancefee}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

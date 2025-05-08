@@ -1,0 +1,36 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %} Aboutus {% endblock %}
+
+{% block content %}
+    {% if request.path == '/aboutus' %}
+    <div class="hero_section section">
+        <div class="hero_content section_content">
+            <p class="content_subtitle">Read</p>
+            <p class="content_header"><span class="content_highlight nanum"> About us </p>
+        </div>
+    </div>
+    <div class="popular_section section">
+        <div class="popular_content section_content">
+            <p class="content_header"><span class="content_highlight"> Where to Next? </span> Let’s Plan Your Philippine Escape!</p>
+            <p class="content_subtitle">Your one-stop solcoution for booking amazing tours and spots.</p>
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if request.path == '/aboutus/contact' %}
+    <div class="hero_section section">
+        <div class="hero_content section_content">
+            <p class="content_subtitle">Read</p>
+            <p class="content_header"><span class="content_highlight nanum"> Contact </p>
+        </div>
+    </div>
+    <div class="popular_section section">
+        <div class="popular_content section_content">
+            <p class="content_header"><span class="content_highlight"> Where to Next? </span> Let’s Plan Your Philippine Escape!</p>
+            <p class="content_subtitle">Your one-stop solcoution for booking amazing tours and spots.</p>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

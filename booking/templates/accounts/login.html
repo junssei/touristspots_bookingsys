@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Login | TourSpot </title>
+    <link rel="stylesheet" href="{% static 'login_register.css' %}">
+</head>
+<body>
+    {% include 'message.html' %}
+    <div class="login-register-container">
+        <div class="left-container container" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.60) 100%), url(../static/images/bg4.jpeg) lightgray -769.631px 0px / 224.03% 100% no-repeat; background-size: cover; background-position: center;">
+            <div class="logo-container">
+                <img src="{% static 'images/logo/logo=booking-def.svg' %}" alt="Logo" class="logo">
+                <a href="/" class="home-btn button"><img src="{% static 'images/icon/icons=home-02.svg' %}" alt=""><span> Home </span></a>
+            </div>
+        </div>
+        <div class="right-container container">
+            <div id="descriptions">
+                <div class="header-actions-container">
+                    <a href="/" class="header-actions links"> < Home </a>
+                </div>
+                <p class="descriptions-header"> Welcome Back! Your Philippine Adventure Awaits </p>
+                <p class="descriptions-content"> Glad to have you back! Pick up where you left off—book that Coron island-hopping tour, finalize your Batanes itinerary, or discover new hidden beaches. Your next unforgettable experience is just a click away! </p>
+            </div>
+            <form action="" class="login-register-form" method="post" autocomplete="off">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="email"> Email </label>
+                    <div class="input-container">
+                        {{ form.username }}
+                    </div>
+                </div>
+                {% if form.username.errors %}
+                    <div class="error-message">
+                        {% for error in form.username.errors %}
+                            <p style="color: red;">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="input-group">
+                    <label for="password"> Password </label>
+                    <div class="input-container">
+                        {{ form.password }}
+                        <img src="{% static 'images/icon/eye-closed.svg' %}" id="password-eyecon" class="password-eyecon icon-medium" onclick="passwordToggle()">
+                    </div>
+                </div>
+                {% if form.password.errors %}
+                    <div class="error-message">
+                        {% for error in form.password.errors %}
+                            <p style="color: red;">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="login-register-actions">
+                    <div class="remember-me">
+                        <input type="checkbox">
+                        <p> Remember me</p>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="" class="links"> Forgot Password? </a>
+                    </div>
+                </div>
+
+                <input type="submit" class="button button-clrbackground" value="Login - Continue Exploring and Planning" name="login">
+                <hr>
+            </form>
+            <p align="center"> New to TourSpot? <a href="register" class="links"> Create an Account </a></p>
+        </div>
+    </div>
+</body>
+<script src="{% static 'javascript/login_register.js' %}"></script>
+</html>

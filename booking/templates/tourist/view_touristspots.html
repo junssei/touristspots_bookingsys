@@ -1,0 +1,101 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %} Tourist Spot {% endblock %}
+
+{% block content %}
+<div class="view-section section">
+    <div class="view-header">
+        <a href="{% url 'touristspots' %}" class="back-btn delt"><img src="{% static 'icon/action-icons=back.svg' %}"> Back </a>
+        <div>
+            <h1 class="header">
+                {{list.spotname}}
+            </h1>
+            <div class="subheader">
+                {{list.address}}
+            </div>
+        </div>
+    </div>
+    <div class="view-body">
+        <div class="view-content">
+            <div class="content-image">
+                <div class="main-image">
+                    <img src="{{ list.image.url }}" class="image" alt="image-card">
+                </div>
+                <div class="sub-images">
+                    {% for z in gallery %}
+                        <img src="{{ z.image.url }}" class="image" alt="image-card">
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="content-description">
+                <h2> Description </h2>
+                <p>
+                    {{list.description}}
+                </p>
+            </div>
+            <div class="content-reviews">
+                <h2> Reviews </h2>
+                {% if user.is_authenticated %}
+                <form action="" method="post" class="review-form">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <label for=""> Leave reviews </label>
+                        <div class="input-container">
+                            {{ reviewform.review }}
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-container">
+                            {{ reviewform.rating }}
+                        </div>
+                    </div>
+                    <button name="review_post" class="button-small-long button-clrprimary-wimg"> Post </button>
+                </form>
+                {% endif %}
+                <div class="reviews-slide">
+                {% for z in reviews %}
+                    <div class="review-username">
+                        <img src="{{ z.user.image.url }}" alt="profile">
+                        {{ z.user.username }}
+                    </div>
+                    <div class="review-rating" style="color: #EAB64D">
+                        {% if z.rating == '1' %}
+                            ★  ☆  ☆  ☆  ☆
+                        {% elif z.rating == '2' %}
+                            ★  ★  ☆  ☆  ☆
+                        {% elif z.rating == '3' %}
+                            ★  ★  ★  ☆  ☆
+                        {% elif z.rating == '4' %}
+                            ★  ★  ★  ★  ☆
+                        {% elif z.rating == '5' %}
+                            ★  ★  ★  ★  ★
+                        {% endif %}
+                    </div>
+                    <div class="review-para">
+                        {{ z.review }}
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        <form class="view-actions" action="" method="post">
+            {% csrf_token %}
+            <p> Entrance Fee: ₱<span>{{ list.entrancefee }}</span></p>
+            <div class="input-group">
+                <label for=""> Date </label>
+                <div class="input-container">
+                    {{ bookingline.visitDate }}
+                </div>
+            </div>
+            <div class="input-group">
+                <label for=""> Number of Guest </label>
+                <div class="input-container">
+                    {{ bookingline.numberOfPeople }}
+                </div>
+            </div>
+            <button class="button button-clrbackground"> Confirm Booking </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
