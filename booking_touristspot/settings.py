@@ -77,6 +77,29 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'koyebdb',
+#         'USER': 'koyeb-adm',
+#         'PASSWORD': 'npg_8vTBQhdKRe2C',
+#         'HOST': 'ep-shiny-wind-a1dkes9b.ap-southeast-1.pg.koyeb.app',
+#         'OPTIONS': {'sslmode': 'require'},
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'masteruser',
+#         'PASSWORD': 'jesusdaily12!',
+#         'HOST': 'db-touristspot.chia8q4se0k2.ap-southeast-2.rds.amazonaws.com',
+#         'PORT': '5432',
+#         'OPTIONS': {'sslmode': 'require'},
+#     }
+# }
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
