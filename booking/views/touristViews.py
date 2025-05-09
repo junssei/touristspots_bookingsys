@@ -37,10 +37,11 @@ def view_touristspot(request, id):
     list = TouristSpot.objects.get(id=id)
     reviews = Review.objects.filter(spot=list)
     gallery = PhotoGallery.objects.filter(spotID=list)[:5]
-    booking_list = Booking.objects.filter(user=request.user)
-    bookingline_list = BookingLine.objects.filter(booking__in=booking_list)
     
     if request.method == 'POST':
+        booking_list = Booking.objects.filter(user=request.user)
+        bookingline_list = BookingLine.objects.filter(booking__in=booking_list)
+        
         if 'review' in request.POST:
             reviewform = AddReviewForm(request.POST)
             if reviewform.is_valid():
@@ -76,9 +77,10 @@ def view_touristspot(request, id):
 
                 messages.success(request, "Book added successfully! Next Payment. ")
                 return redirect('payment', booking.id)
-    booking = BookingForm()
-    reviewform = AddReviewForm()
-    bookingline = BookingLineForm()
+    else:
+        booking = BookingForm()
+        reviewform = AddReviewForm()
+        bookingline = BookingLineForm()
 
     context = {
         'list': list,

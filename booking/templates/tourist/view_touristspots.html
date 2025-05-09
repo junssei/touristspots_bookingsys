@@ -84,7 +84,7 @@
         
         <form class="view-actions" action="" method="post">
             {% if not user.is_authenticated %}
-            <p style="text-align: center; width: 100%; font-size: 24px;"> Please Log In </p>
+            <p style="text-align: center; width: 100%; font-size: 16px; color: var(--gray);"> Required to Log In to Book. </p>
             {% else %}
             {% csrf_token %}
             <p> Entrance Fee: ₱<span>{{ list.entrancefee }}</span></p>
