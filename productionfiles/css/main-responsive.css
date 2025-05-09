@@ -1,0 +1,53 @@
+/* Portrait phones */
+@media (max-width: 575.98px) {
+    .header-container{
+        position: relative;
+    }
+
+    .section, .container{
+        font-size: 16px;
+        padding: 9px 16px;
+    }
+
+    .header-container .header-navigation{
+        display: none;
+    }
+
+    .subsection{
+        padding: 0;
+    } 
+}
+
+/* Landscape phones */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .header-container{
+        position: relative;
+    }
+
+    .section, .container{
+        font-size: 16px;
+        padding: 9px 64px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .header-container{
+        position: relative;
+    }
+
+    .section, .container{
+        font-size: 16px;
+        padding: 9px 128px;
+    }
+}
+
+/* Small desktops */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    
+}
+
+/* Large desktops */
+@media (min-width: 1200px) {
+    
+}
