@@ -99,7 +99,7 @@ class TouristSpot(models.Model):
     spotname = models.CharField(max_length=50, unique=True, blank=False)
     address = models.CharField(max_length=150, blank=False)
     description = models.TextField()
-    entrancefee = models.IntegerField()
+    entrancefee = models.DecimalField(max_digits=10, decimal_places=2, default=1)
     openingday = models.CharField(max_length=15, choices=days, default="MON")
     openinghours = models.TimeField(default='00:00:00')
     createdDate = models.DateTimeField(auto_now_add=True)
@@ -131,23 +131,42 @@ class PhotoGallery(models.Model):
 class Booking(models.Model):
     STATUS_CHOICES = [('pending', 'Pending'), ('confirmed', 'Confirmed'), ('cancelled', 'Cancelled')]
 
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    totalcost = models.DecimalField(max_digits=10, decimal_places=2,  default=1)
+    totalcost = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     createdAt = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return str(self.user)
 
 class BookingLine(models.Model):
-    booking = models.ForeignKey(Booking, on_delete=models.CASCADE, default=1)
-    spot = models.ForeignKey(TouristSpot, on_delete=models.CASCADE, default=1)
-    visitDate = models.DateField(default='2025-10-10')
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    spot = models.ForeignKey(TouristSpot, on_delete=models.CASCADE)
+    visitDate = models.DateField(default=timezone.now)
     numberOfPeople = models.PositiveIntegerField(default=1)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=1)
 
     def __str__(self):
-        return str(self.booking)
+        return str(self.booking) + " - " + str(self.spot) + " - " + str(self.visitDate) + " - " + str(self.numberOfPeople) + " - " + str(self.price)
+
+class Payment(models.Model):
+    class paymentMethods(models.TextChoices):
+        PAYPAL = 'PP', 'PayPal'
+        PAYMAYA = 'MY', 'Maya'
+        GCASH = 'GC', 'GCash'
+
+    class statusChoices(models.TextChoices):
+        PENDING = 'P', 'Pending'
+        SUCCESS = 'S', 'Success'
+        FAILED = 'F', 'Failed'
+        CANCELLED = 'C', 'Cancelled'
+        REFUNDED = 'R', 'Refunded'
+
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=1)
+    paymentMethod = models.CharField(max_length=2, choices=paymentMethods.choices, default=paymentMethods.GCASH)
+    created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=2, choices=statusChoices.choices, default=statusChoices.PENDING)
     
 class Notification(models.Model):
     userID = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

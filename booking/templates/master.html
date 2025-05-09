@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> {% block title %} {% endblock %} </title>
+    {% block stylesheets %} {% endblock %}
     <link rel="stylesheet" href="{% static 'main.css' %}">
     <link rel="stylesheet" href="{% static 'main-responsive.css' %}">
     <link rel="stylesheet" href="{% static 'touristspot.css' %}">
@@ -17,9 +18,9 @@
             <a href="{% url 'main' %}"><img src="{% static 'images/logo/logo=booking-def.svg' %}" alt="Logo" class="logo"></a>
         </div>
         {% url 'main' as home %}
-        {% url 'touristspots' as explore %}
         {% url 'aboutus' as aboutus %}
         {% url 'contact' as contact %}
+        {% url 'touristspots' as explore %}
         <div class="header-navigation">
             <a href="{% url 'main' %}" class="{% if request.path == home %} active {% endif %}"><span> Home </span></a>
             <a href="{% url 'touristspots' %}" class="{% if request.path == explore %} active {% endif %}"><span> Explore Spots </span></a>
@@ -38,7 +39,12 @@
                     {% else %}
                     <img src="/media/profiles/default-profile.jpeg" class="profile-image">
                     {% endif %}
-                    <div class="profile-name">
+                    <div class="user-actions">
+                        <div class="user-action">
+                            <a href="{% url 'profile' request.user.id %}" class="action"> Profile </a>
+                            <a href="{% url 'user_booking' request.user.id %}" class="action"> My Bookings </a>
+                            <a href="{% url 'logout' %}" class="action"> Logout </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,6 +52,27 @@
         </div>
     </div>
     {% block content %} {% endblock %}
+    <!-- <div class="footer-container">
+        <div class="footer-navigation">
+            <div class="footer-links">
+                <div class="footer-links-header">
+                    <a href="{% url 'main' %}"> Home </a>
+                    <a href="{% url 'touristspots' %}"> Explore </a>
+                    <a href="{% url 'aboutus' %}"> About Us </a>
+                    <a href="{% url 'contact' %}"> Contact </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-logo">
+            <img src="{% static 'images/logo/logo=booking-def.svg' %}" alt="Logo" class="logo">
+            <p> © 2025 TourSpot. All rights reserved. </p>
+            <div class="socialmedialinks">
+                <a href=""><img src=""> </a>
+                <a href=""><img src=""> </a>
+                <a href=""><img src=""> </a>
+            </div>
+        </div>
+    </div> -->
     {% block script %}
     {% endblock %}
     <script src="{% static 'admin/admin-script.js' %}"></script>

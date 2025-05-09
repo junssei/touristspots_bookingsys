@@ -12,6 +12,16 @@ urlpatterns = [
     path('accounts/login', views.user_login, name='login'),
     path('accounts/logout', views.user_logout, name='logout'),
     path('accounts/register', views.register, name='register'),
+    path('accounts/<int:id>/profile', views.user_profile, name='profile'),
+    path('accounts/<int:id>/delete', views.delete_profile, name='delete_profile'),
+    path('accounts/<int:id>/profile/edit', views.edit_profile, name='edit_profile'),
+    path('accounts/<int:id>/changepassword', views.change_password, name='change_password'),
+    
+    # User Booking
+    path('accounts/<int:id>/booking', views.user_booking, name='user_booking'),
+    path('accounts/<int:id>/booking/view', views.view_booking, name='view_booking'),
+    path('accounts/<int:id>/booking/edit', views.edit_booking, name='edit_booking'),
+    path('accounts/<int:id>/booking/cancel', views.delete_booking, name='delete_booking'),
 
     # Admin Page
     path('ts-admin', adminViews.admin_dashboard, name='admin_dashboard'),
@@ -59,5 +69,6 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += [
     path('touristspots/', touristViews.touristspots, name='touristspots'),
     path('touristspots/<int:id>/view', touristViews.view_touristspot, name='view_touristspot'),
+    path('touristspots/<int:id>/payment', touristViews.book_payment, name='payment')
 ]
 

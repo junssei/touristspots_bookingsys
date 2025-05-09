@@ -1,5 +1,6 @@
-from django import forms
 from .models import *
+from django import forms
+from datetime import date
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 class CustomUserCreationForm(UserCreationForm):
@@ -175,19 +176,22 @@ class AddReviewForm(forms.ModelForm):
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['user', 'totalcost']
-        widgets = {
-            'user': forms.Select(attrs={'class': 'form-control', 'required': True}),
-            'totalcost': forms.NumberInput(attrs={'class': 'form-control', 'required': True}),
-        }
+        fields = '__all__'
 
 class BookingLineForm(forms.ModelForm):
     class Meta:
         model = BookingLine
-        fields = ['spot', 'visitDate', 'numberOfPeople', 'price']
+        fields = ['visitDate', 'numberOfPeople', 'price']
         widgets = {
-            'spot': forms.Select(attrs={'required': True}),
-            'visitDate': forms.DateInput(attrs={'type': 'date', 'required': True}),
-            'numberOfPeople': forms.NumberInput(attrs={'required': True}),
+            'visitDate': forms.DateInput(attrs={'type': 'date', 'required': True, 'min': date.today().strftime('%Y-%m-%d'), 'max': (date.today().replace(year=date.today().year + 1)).strftime('%Y-%m-%d')}),
+            'numberOfPeople': forms.NumberInput(attrs={'required': True, 'min':1, 'max':"10", 'value':1, 'oninput':"validity.valid||(value='');", 'id':"numberOfPeople"}),
             'price': forms.NumberInput(attrs={'class': 'form-control', 'required': True}),
+        }
+
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = ['paymentMethod']
+        widgets = {
+            'paymentMethod': forms.Select(attrs={'class': 'form-control', 'required': True}),
         }

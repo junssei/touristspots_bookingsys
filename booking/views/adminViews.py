@@ -1,6 +1,7 @@
 from ..models import CustomUser, TouristSpot, Category, TourGuide
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from ..forms import *
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -8,6 +9,7 @@ from django.template import loader
 from django.urls import reverse
 from datetime import datetime
 
+@login_required(login_url='login')
 def admin_dashboard(request):
     if not request.user.is_staff:
         return redirect('main')   
@@ -18,6 +20,7 @@ def admin_dashboard(request):
     return HttpResponse(template.render(context, request))
 
 # Admin Views - Users
+@login_required(login_url='login')
 def users(request):
     list = CustomUser.objects.all()
     template = loader.get_template('admin/users/main.html')
@@ -27,6 +30,7 @@ def users(request):
     }
     return HttpResponse(template.render(context, request))
 
+@login_required(login_url='login')
 def add_user(request):
     if request.method == 'POST':
         form = AddUserAdminForm(request.POST, request.FILES)
@@ -47,6 +51,7 @@ def add_user(request):
     template = loader.get_template('admin/users/add.html')
     return HttpResponse(template.render(context, request))
 
+@login_required(login_url='login')
 def view_user(request, id):
     list = CustomUser.objects.get(id=id)
     template = loader.get_template('admin/users/view.html')
@@ -91,6 +96,7 @@ def delete_user(request, id):
     return HttpResponse(template.render(context, request))
 
 # Admin Views - TouristSpot
+@login_required(login_url='login')
 def spot(request):
     list = TouristSpot.objects.all()
     template = loader.get_template('admin/spot/main.html')
@@ -179,6 +185,7 @@ def pending_spot(request):
     return HttpResponse(template.render(context, request))
 
 # Admin Views - Category
+@login_required(login_url='login')
 def category(request):
     list = Category.objects.all()
     template = loader.get_template('admin/category/main.html')
@@ -257,6 +264,7 @@ def delete_category(request, id):
     return HttpResponse(template.render(context, request))
 
 # Admin Views - Booking
+@login_required(login_url='login')
 def booking(request):
     template = loader.get_template('admin/booking/main.html')
     context = {
@@ -293,6 +301,7 @@ def booking_delete(request, id):
     return HttpResponse(template.render(context, request))
 
 # Admin Views - Gallery
+@login_required(login_url='login')
 def gallery(request):
     list = TouristSpot.objects.all()
     template = loader.get_template('admin/gallery/main.html')

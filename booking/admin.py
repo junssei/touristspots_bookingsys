@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser, TourGuide, Category, TouristSpot, PhotoGallery, Booking, BookingLine, Review, Notification
+from .models import CustomUser, TourGuide, Category, TouristSpot, PhotoGallery, Booking, BookingLine, Review, Notification, Payment
 
 # Register your models here.
 class CustomUserAdmin(admin.ModelAdmin):
@@ -33,6 +33,11 @@ class NotificationAdmin(admin.ModelAdmin):
     list_display = ('userID', 'message', 'sentDate', 'isRead')
     list_filter = ('isRead',)
     search_fields = ('message',)
+
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ('booking', 'amount', 'paymentMethod', 'created_at', 'status')
+    list_filter = ('status',)
+    search_fields = ('booking__user__email',)
     
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(TouristSpot, TouristSpotAdmin)
@@ -43,6 +48,7 @@ admin.site.register(Booking, BookingAdmin)
 admin.site.register(BookingLine, BookingLineAdmin)
 admin.site.register(Review, ReviewAdmin)
 admin.site.register(Notification, NotificationAdmin)
+admin.site.register(Payment, PaymentAdmin)
 
 admin.site.site_title = "Booking Tourist Spot Admin"
 admin.site.site_header = "Booking Tourist Spot Admin"

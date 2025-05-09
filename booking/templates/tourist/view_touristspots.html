@@ -34,9 +34,7 @@
             </div>
             <div class="content-description">
                 <h2> Description </h2>
-                <p>
-                    {{list.description}}
-                </p>
+                <p> {{list.description}} </p>
             </div>
             <div class="content-reviews">
                 <h2> Reviews </h2>
@@ -83,7 +81,11 @@
                 </div>
             </div>
         </div>
+        
         <form class="view-actions" action="" method="post">
+            {% if not user.is_authenticated %}
+            <p style="text-align: center; width: 100%; font-size: 24px;"> Please Log In </p>
+            {% else %}
             {% csrf_token %}
             <p> Entrance Fee: ₱<span>{{ list.entrancefee }}</span></p>
             <div class="input-group">
@@ -98,8 +100,27 @@
                     {{ bookingline.numberOfPeople }}
                 </div>
             </div>
-            <button class="button button-clrbackground"> Confirm Booking </button>
+            <div class="input-group">
+                <label for=""> Total Price </label>
+                <div class="input-container">
+                    <p> ₱<span id="totalPrice"> {{ list.entrancefee }} </span></p>
+                </div>
+            </div>
+            <input type="submit" name="confirm_book" class="button button-clrbackground" value="Book Now">
+            {% endif %}
         </form>
     </div>
 </div>
+{% endblock %}
+{% block script %}
+<script>
+    const numberOfPeopleInput = document.getElementById('numberOfPeople');
+    const totalPriceElement = document.getElementById('totalPrice');
+    const entranceFee = "{{ list.entrancefee }}";
+    numberOfPeopleInput.addEventListener('input', function() {
+        const numberOfPeople = parseInt(numberOfPeopleInput.value);
+        const totalPrice = entranceFee * numberOfPeople;
+        totalPriceElement.textContent = totalPrice;
+    });
+</script>
 {% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'master.html' %}
+{% load static %}
+
+{% block title %} Booking {{ title }} #{{booking.id}} {% endblock %}
+{% block content %}
+<div class="view-section section">
+    <div class="view-header">
+        <a href="{% url 'touristspots' %}" class="back-btn delt"><img src="{% static 'icon/action-icons=back.svg' %}"> Back </a>
+        <div>
+            <h1 class="header">
+                Booking {{ title }} #{{booking.id}}
+            </h1>
+        </div>
+    </div>
+    <div class="view-body">
+        <div class="view-content">
+            <div class="content-description" style="display:flex; flex-direction: column; gap: 16px;">
+                <div>
+                    <h2> {{ spot.spotname }} </h2>
+                    <h3> 📍{{ spot.address }} </h3>
+                </div>
+                <p> {{ spot.description }} </p>
+                <div style="display: flex; flex-direction: row; gap: 16px; justify-content: flex-start; flex-wrap: wrap;"> 
+                    <p> <b>Entrance Free</b>: ₱{{ spot.entrancefee }} </p>
+                    <p> <b>Opening Day</b>: {{ spot.openingday }} </p>
+                    <p> <b>Opening Hours</b>: {{ spot.openinghours }} </p>
+                </div>
+            </div>
+        </div>
+        <form class="view-actions" action="" method="post">
+            {% csrf_token %}
+            <h2 class="actions-header"> Payment <span class="tags"> {{ booking.status }} </span></h2> 
+            <p> Email Address: {{ booking }} </p>
+            <div class="input-group">
+                <label for=""> Number of Guest </label>
+                <div class="input-container">
+                    <input type="text" name="guest" value="{{ bookingline.numberOfPeople }}" disabled>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for=""> Visit Date </label>
+                <div class="input-container">
+                    <input type="text" name="date" value="{{ bookingline.visitDate }}" disabled>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="amount"> Total Cost </label>
+                <div class="input-container">
+                    <input type="text" name="amount" value="{{ booking.totalcost }}" disabled>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="payment_method"> Method </label>
+                <div class="input-container">
+                    {{ form.paymentMethod }}
+                </div>
+            </div>
+            <input type="submit" name="pay" class="button button-clrbackground" value="Pay">
+        </form>
+    </div>
+</div>
+{% endblock %}
