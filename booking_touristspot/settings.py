@@ -27,7 +27,8 @@ DEBUG = False
 ALLOWED_HOSTS = ['touristspots-bookingsys.onrender.com', 
                  '13.228.225.19',
                  '18.142.128.26',
-                 '54.254.162.138']
+                 '54.254.162.138',
+                 '127.0.0.1']
 
 # Application definition
 
@@ -144,8 +145,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static/javascript',
 ]
 
-MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'booking.CustomUser'
