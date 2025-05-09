@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-3tyg+4_0=22d7oh0kxm^3vrbw$$-ij6g%a9*lfl*#_y6)^f_=a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['touristspots-bookingsys.onrender.com', 
                  '13.228.225.19',
                  '18.142.128.26',
@@ -31,7 +31,6 @@ ALLOWED_HOSTS = ['touristspots-bookingsys.onrender.com',
                  '127.0.0.1']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
