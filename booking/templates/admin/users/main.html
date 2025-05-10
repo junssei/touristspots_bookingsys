@@ -48,9 +48,9 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a class="view" href="{% url 'view_booking' y.id %}"><img src="{% static 'icon/action-icons=viewinfo.svg' %}" alt=""></a>
-                        <a class="edit" href="{% url 'edit_booking' y.id %}"><img src="{% static 'icon/action-icons=edit-01.svg' %}" alt=""></a>
-                        <a class="delt" href="{% url 'delete_booking' y.id %}"><img src="{% static 'icon/action-icons=trash-01.svg' %}"></a>
+                        <a class="view" href="{% url 'view_user' y.id %}"><img src="{% static 'icon/action-icons=viewinfo.svg' %}" alt=""></a>
+                        <a class="edit" href="{% url 'edit_user' y.id %}"><img src="{% static 'icon/action-icons=edit-01.svg' %}" alt=""></a>
+                        <a class="delt" href="{% url 'delete_user' y.id %}"><img src="{% static 'icon/action-icons=trash-01.svg' %}"></a>
                     </td>
                 </tr>
                 {% endfor %}

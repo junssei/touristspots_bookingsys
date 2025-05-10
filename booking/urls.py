@@ -55,7 +55,7 @@ urlpatterns = [
     path('ts-admin/booking/<int:id>/edit', adminViews.booking_edit, name='edit_booking'),
     path('ts-admin/booking/<int:id>/delete', adminViews.booking_delete, name='delete_booking'),
 
-    path('ts-admin/booking/<int:id>/approve', adminViews.booking_view, name='approve_booking'),
+    path('ts-admin/booking/<int:id>/approve', adminViews.booking_approve, name='approve_booking'),
     
     # Admin - Gallery
     path('ts-admin/gallery/', adminViews.gallery, name='gallery'),

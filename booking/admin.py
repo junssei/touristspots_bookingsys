@@ -24,7 +24,7 @@ class BookingAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'status', 'totalcost', 'createdAt',)
 
 class BookingLineAdmin(admin.ModelAdmin):
-    list_display = ('booking', 'spot', 'visitDate', 'numberOfPeople', 'price',)
+    list_display = ('id', 'booking', 'spot', 'visitDate', 'numberOfPeople', 'price',)
 
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('user', 'spot', 'rating', 'review', 'createdDate')

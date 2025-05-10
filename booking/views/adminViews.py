@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from ..forms import *
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.template import loader
 from django.urls import reverse
@@ -321,6 +321,13 @@ def booking_delete(request, id):
         
     }
     return HttpResponse(template.render(context, request))
+
+def booking_approve(request, id):
+    booking = get_object_or_404(Booking, id=id)
+    booking.status = 'Confirmed'
+    booking.save()
+    messages.success(request, "Booking approved successfully!")
+    return redirect('booking')
 
 # Admin Views - Gallery
 @login_required(login_url='login')
