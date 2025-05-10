@@ -120,19 +120,26 @@ def delete_profile(request, id):
     return HttpResponse(template.render(context, request))
 
 # User Bookings
-@login_required(login_url='login')
 def user_booking(request, id):
-    bookings = Booking.objects.filter(user=id)
-    booking = Booking.objects.get(id=id)
-    bookingline = BookingLine.objects.get(booking=booking)
-    spot = TouristSpot.objects.get(id=bookingline.spot.id)
-    payment = Payment.objects.get(booking=booking)
-    context = {
-        'bookings': bookings,
+    booking = Booking.objects.filter(user=id)
+    if not booking.exists():
+        context = {
+            'title': "My Bookings",
+            'action': "My Bookings",
+        }
+    else:
+        payment = Payment.objects.get(booking__in=booking)
+        bookingline = BookingLine.objects.get(booking__in=booking)
+        context = {
+        'booking': booking,
+        'payment': payment,
+        'bookingline': bookingline,
+
         'title': "My Bookings",
         'action': "My Bookings",
     }
-    template = loader.get_template('accounts/booking.html')
+        
+    template = loader.get_template('accounts/bookings/booking.html')
     return HttpResponse(template.render(context, request))
 
 @login_required(login_url='login')
@@ -143,7 +150,7 @@ def view_booking(request, id):
         'title': "Booking Details",
         'action': "Booking Details",
     }
-    template = loader.get_template('accounts/view_booking.html')
+    template = loader.get_template('accounts/bookings/view.html')
     return HttpResponse(template.render(context, request))
 
 @login_required(login_url='login')

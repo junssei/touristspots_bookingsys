@@ -97,3 +97,33 @@
     border: 1px solid var(--secondary);
     background-color: #eab64d5f;
 }
+
+.info-container .list-container{
+    width: 100%;
+    padding: 32px;
+    position: relative;
+    border-radius: 8px;
+    background-color: var(--lightgray);
+}
+
+.list-container .list-item{
+    gap: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.list-item .list-header h1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.list-item .list-body{
+    gap: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

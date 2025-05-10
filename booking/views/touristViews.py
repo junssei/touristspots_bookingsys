@@ -41,7 +41,7 @@ def view_touristspot(request, id):
     if request.method == 'POST':
         booking_list = Booking.objects.filter(user=request.user)
         bookingline_list = BookingLine.objects.filter(booking__in=booking_list)
-        
+
         if 'review' in request.POST:
             reviewform = AddReviewForm(request.POST)
             if reviewform.is_valid():
@@ -105,9 +105,11 @@ def book_payment(request, id):
             payment.booking = booking
             payment.amount = booking.totalcost
             payment.paymentMethod = request.POST.get('paymentMethod')
+            payment.status = "Paid"
+            payment.save()
 
             messages.success(request, "Payment successful!")
-            return redirect('user_booking')
+            return redirect('user_booking', request.user.id)
         else:
             messages.error(request, "Error processing payment. Please try again.")
             return redirect('payment', id)

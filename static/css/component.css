@@ -31,6 +31,10 @@
     --normal_6px: 6px;
 }
 
+.show-flex{
+    display: flex !important;
+}
+
 .nanum{
     font-size: 98px;
     font-weight: 400 !important;

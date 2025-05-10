@@ -35,11 +35,11 @@
                 <img src="{% static 'icon/icons=bell.svg' %}" alt="notification" class="notification icon notif" id="notification">
                 <div class="user-profile">
                     {% if request.user.image.url != null %}
-                    <img src="{{ request.user.image.url }}" class="profile-image">
+                    <img src="{{ request.user.image.url }}" class="profile-image" id="profileimg">
                     {% else %}
-                    <img src="/media/profiles/default-profile.jpeg" class="profile-image">
+                    <img src="/media/profiles/default-profile.jpeg" class="profile-image" id="profileimg">
                     {% endif %}
-                    <div class="user-actions">
+                    <div class="user-actions" id="useractions">
                         <div class="user-action">
                             <a href="{% url 'profile' request.user.id %}" class="action"> Profile </a>
                             <a href="{% url 'user_booking' request.user.id %}" class="action"> My Bookings </a>
@@ -76,5 +76,22 @@
     {% block script %}
     {% endblock %}
     <script src="{% static 'admin/admin-script.js' %}"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const profileImg = document.getElementById('profileimg');
+        const userActions = document.getElementById('useractions');
+
+        // Initially hide the user actions
+        userActions.style.display = 'none';
+
+        profileImg.addEventListener('click', function () {
+        if (userActions.style.display === 'none') {
+            userActions.style.display = 'block';
+        } else {
+            userActions.style.display = 'none';
+        }
+        });
+    });
+    </script>
 </body>
 </html>
