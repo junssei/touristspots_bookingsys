@@ -33,7 +33,7 @@ body{
         background-color: transparent;
     }
 
-    20%{
+    10%{
         background-color: var(--white);
     }
 
@@ -74,7 +74,7 @@ body{
         color: var(--white);
     }
 
-    20%{
+    10%{
         color: var(--black);
     }
 

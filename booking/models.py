@@ -156,17 +156,21 @@ class Payment(models.Model):
         GCASH = 'GC', 'GCash'
 
     class statusChoices(models.TextChoices):
+        NOT_PAID = 'NP', 'Not Paid'
         PENDING = 'P', 'Pending'
         SUCCESS = 'S', 'Success'
         FAILED = 'F', 'Failed'
         CANCELLED = 'C', 'Cancelled'
         REFUNDED = 'R', 'Refunded'
 
-    booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    booking = models.OneToOneField(Booking, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=1)
     paymentMethod = models.CharField(max_length=2, choices=paymentMethods.choices, default=paymentMethods.GCASH)
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=2, choices=statusChoices.choices, default=statusChoices.PENDING)
+    status = models.CharField(max_length=2, choices=statusChoices.choices, default=statusChoices.NOT_PAID)
+
+    def __str__(self):
+        return str(self.booking) + " - " + str(self.amount) + " - " + str(self.paymentMethod) + " - " + str(self.status)
     
 class Notification(models.Model):
     userID = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

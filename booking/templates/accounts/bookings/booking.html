@@ -15,30 +15,44 @@
     </div>
     <div class="content_body">
         <div class="info-container">
-            <div class="list-container">
-                {% for booking in booking %}
+           <div class="list-container">
+                {% for booking in user_bookings %}
                 <div class="list-item">
                     <div class="list-header">
-                        <h1><span> Booking #{{ booking.id }} </span> <span> {{ booking.status }} </span></h1>
-                        <h3> Spot Name: {{ bookingline.spot }} </h3>
+                        <h1><span> Booking #{{ booking.id }}</span> <span>{{ booking.status }}</span></h1>
+                        {% for booking_line in booking.bookingline_set.all %}
+                            <h3> Spot Name: {{ booking_line.spot }}</h3>
+                        {% endfor %}
                     </div>
                     <div class="list-body">
                         <div class="list-content">
-                            <p> Visit Date: {{ bookingline.visitDate }} </p>
-                            <p> Number of Guests: {{ bookingline.numberOfPeople }} </p>
-                            <p> Total Cost: ₱{{ booking.totalcost }} </p>
+                            {% for booking_line in booking.bookingline_set.all %}
+                                <p> Visit Date: {{ booking_line.visitDate }}</p>
+                                <p> Number of Guests: {{ booking_line.numberOfPeople }}</p>
+                            {% endfor %}
+                            <p> Total Cost: ₱{{ booking.totalcost }}</p>
                         </div>
                         <div class="list-footer">
-                            <p> Payment Method: {{ payment.get_paymentMethod_display }} </p>
-                            <p> Payment Status: {{ payment.get_status_display }} </p>
-                            <p> Booking Date: {{ booking.createdAt }} </p>
+                            {% with payment=booking.payment %}
+                                {% if payment %}
+                                    <p> Payment Method: {{ payment.get_paymentMethod_display }}</p>
+                                    <p> Payment Status: {{ payment.get_status_display }}</p>
+                                {% endif %}
+                            {% endwith %}
+                            <p> Booking Date: {{ booking.createdAt }}</p>
                         </div>
                     </div>
                     <div class="list-actions">
-                        
+                       {% with payment=booking.payment %}
+                            {% if payment.status == 'P' %}
+                                <a href="" class="button "> Cancel </a>
+                            {% elif payment.status == 'NP' %}
+                                <a href="{% url 'payment' booking.id %}" class="button button-blue"> Add Payment </a>
+                            {% endif %}
+                        {% endwith %}
                     </div>
-                {% endfor %}
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>

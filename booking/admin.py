@@ -21,7 +21,7 @@ class PhotoGalleryAdmin(admin.ModelAdmin):
     list_display = ('image', 'spotID', 'caption', 'is_approved')
 
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('user', 'status', 'totalcost', 'createdAt',)
+    list_display = ('id', 'user', 'status', 'totalcost', 'createdAt',)
 
 class BookingLineAdmin(admin.ModelAdmin):
     list_display = ('booking', 'spot', 'visitDate', 'numberOfPeople', 'price',)
@@ -35,7 +35,7 @@ class NotificationAdmin(admin.ModelAdmin):
     search_fields = ('message',)
 
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('booking', 'amount', 'paymentMethod', 'created_at', 'status')
+    list_display = ('booking_id', 'amount', 'paymentMethod', 'created_at', 'status')
     list_filter = ('status',)
     search_fields = ('booking__user__email',)
     

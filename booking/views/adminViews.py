@@ -1,4 +1,4 @@
-from ..models import CustomUser, TouristSpot, Category, TourGuide
+from ..models import CustomUser, TouristSpot, Category, TourGuide, Booking, BookingLine, Payment
 from django.contrib.auth import login, authenticate, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -11,11 +11,25 @@ from datetime import datetime
 
 @login_required(login_url='login')
 def admin_dashboard(request):
+    user = CustomUser.objects.all().count()
+    spots = TouristSpot.objects.all().count()
+    booking = Booking.objects.all().count()
+    category = Category.objects.all().count()
+
+    reviews = Review.objects.all()
+
     if not request.user.is_staff:
-        return redirect('main')   
+        return redirect('main')
+    
     template = loader.get_template('admin/dashboard.html')
     context = {
-        
+        'countuser': user,
+        'countspots': spots,
+        'countbooking': booking,
+        'countcategory': category,
+        'countreviews': reviews.count(),
+
+        'reviewlist': reviews,
     }
     return HttpResponse(template.render(context, request))
 
@@ -266,9 +280,17 @@ def delete_category(request, id):
 # Admin Views - Booking
 @login_required(login_url='login')
 def booking(request):
+    bookinglinelist = BookingLine.objects.all()
+    payment = Payment.objects.all()
+
     template = loader.get_template('admin/booking/main.html')
     context = {
-        
+        'payment': payment,
+        'bookinglinelist': bookinglinelist,
+    
+        'action': '',
+        'title': "Booking",
+        'subtitle': 'booking',
     }
     return HttpResponse(template.render(context, request))
 

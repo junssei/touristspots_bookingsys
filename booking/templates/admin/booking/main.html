@@ -9,48 +9,35 @@
 </div>
 <div class="content_body">
     <div class="table-container">
-        <h2> All Users </h2>
+        <h2> All {{ subtitle }} </h2>
         <table class="main-table table">
             <thead>
                 <tr> 
-                    <th scope="col"> Username </th>
-                    <th scope="col"> Status </th>
-                    <th scope="col"> Email Address </th>
-                    <th scope="col"> Role </th>
-                    <th scope="col"> </th> <!-- Actions-->
+                    <th> User </th>
+                    <th> Status </th>
+                    <th> Total Cost </th>
+                    <th> Visit Date </th>
+                    <th> Payment </th>
+                    <th> </th>
                 </tr>
             </thead>
             <tbody>
-                {% for y in list %}
+                {% for y in bookinglinelist %}
                 <tr>
-                    <td> {{ y.username }} </td>
-                    <td style="text-align: center;">
-                        {% if y.is_active == True %}
-                        <img src="{% static 'icon/icons=active.svg' %}" class="icon-small" alt="">
-                        {% else %}
-                        <img src="{% static 'icon/icons=inactive.svg' %}" class="icon-small" alt="">
+                    <td> {{ y.booking.user }} </td>
+                    <td> {{ y.booking.status }} </td>
+                    <td> {{ y.booking.totalcost }} </td>
+                    <td> {{ y.visitDate }} </td>
+                    {% for x in payment %}
+                        {% if x.booking == y.booking %}
+                            <td> {{ x.status }} </td>
                         {% endif %}
-                    </td>
-                    <td> {{ y.email }} </td>
+                    {% endfor %}    
                     <td>
-                        {% if y.is_staff == True %}
-                            {% if y.is_superuser == True %}
-                            Super Admin,
-                            {% else %}
-                            Admin,
-                            {% endif %}
-                        {% else %} 
-                            Tourist,
-                        {% endif %}
-                        
-                        {% if y.is_tourguide == True %}
-                            Tour Guide,
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a class="view" href="{% url 'view_user' y.id %}"><img src="{% static 'icon/action-icons=viewinfo.svg' %}" alt=""></a>
-                        <a class="edit" href="{% url 'edit_user' y.id %}"><img src="{% static 'icon/action-icons=edit-01.svg' %}" alt=""></a>
-                        <a class="delt" href="{% url 'delete_user' y.id %}"><img src="{% static 'icon/action-icons=trash-01.svg' %}"></a>
+                        <a class="confirm" href="{% url 'approve_booking' y.id %}"><img src="{% static 'icon/action-icons=check.svg' %}" alt=""></a>
+                        <a class="view" href="{% url 'view_booking' y.id %}"><img src="{% static 'icon/action-icons=viewinfo.svg' %}" alt=""></a>
+                        <a class="edit" href="{% url 'edit_booking' y.id %}"><img src="{% static 'icon/action-icons=edit-01.svg' %}" alt=""></a>
+                        <a class="delt" href="{% url 'delete_booking' y.id %}"><img src="{% static 'icon/action-icons=trash-01.svg' %}"></a>
                     </td>
                 </tr>
                 {% endfor %}

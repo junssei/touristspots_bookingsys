@@ -130,3 +130,25 @@
     border: 1px solid var(--secondary);
     background-color: #eab64d5f;
 }
+
+/* Dashboard */
+.data-container{
+    gap: 16px;
+    display: flex;
+    flex-direction: row;
+}
+
+.data-container .data-group{
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    padding: 16px 42px;
+    border-radius: 8px;
+    color: var(--white);
+    border: 1px solid var(--lightgray);
+    background-color: var(--primary);
+}
+
+.data-group p{
+    font-size: 18px;
+}

@@ -13,6 +13,9 @@
     --gray: #323232;
     --lightgray: #EDEDED;
     
+    --blue: #4D9BEA;
+    --darkblue: #127C9B;
+
     --green: #4DEA5F;
     --darkgreen: #127C56;
     --black: #000000;
@@ -231,6 +234,15 @@ textarea{
     filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
 }
 
+.button-blue{
+    color: var(--white) !important;
+    background-color: var(--blue) !important;
+}
+
+.button-blue:hover{
+    background-color:  var(--darkblue) !important;
+}
+
 .button-red{
     background-color: var(--red) !important;
 }
@@ -246,6 +258,10 @@ textarea{
 /* Icons Color */
 .notif:hover{
     filter: brightness(0) saturate(100%) invert(35%) sepia(80%) saturate(435%) hue-rotate(107deg) brightness(92%) contrast(92%) !important;
+}
+
+.confirm:hover{
+    filter: brightness(0) saturate(100%) invert(90%) sepia(18%) saturate(1883%) hue-rotate(59deg) brightness(103%) contrast(84%);
 }
 
 .delt:hover{

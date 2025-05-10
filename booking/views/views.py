@@ -121,23 +121,24 @@ def delete_profile(request, id):
 
 # User Bookings
 def user_booking(request, id):
-    booking = Booking.objects.filter(user=id)
-    if not booking.exists():
+    user_bookings = Booking.objects.filter(user=id)
+    
+    if not user_bookings.exists():
         context = {
             'title': "My Bookings",
             'action': "My Bookings",
         }
     else:
-        payment = Payment.objects.get(booking__in=booking)
-        bookingline = BookingLine.objects.get(booking__in=booking)
+        payments = Payment.objects.filter(booking__in=user_bookings)
+        booking_lines = BookingLine.objects.filter(booking__in=user_bookings)
+        
         context = {
-        'booking': booking,
-        'payment': payment,
-        'bookingline': bookingline,
-
-        'title': "My Bookings",
-        'action': "My Bookings",
-    }
+            'user_bookings': user_bookings,
+            'payments': payments,
+            'booking_lines': booking_lines,
+            'title': "My Bookings",
+            'action': "My Bookings",
+        }
         
     template = loader.get_template('accounts/bookings/booking.html')
     return HttpResponse(template.render(context, request))

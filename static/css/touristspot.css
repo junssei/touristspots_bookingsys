@@ -134,7 +134,19 @@
     flex-direction: column;
 }
 
-.view-content .content-image{
+.view-content .top-contents{
+    gap: 16px;
+    display: flex;
+    flex-direction: row;
+}
+
+.top-contents .view-details{
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.view-details .content-image{
     gap: 16px;
     width: 100%;
     height: 400px;
@@ -146,16 +158,19 @@
 .content-image .main-image{
     width: 100%;
     height: 100%;
-    min-height: 300px;
-    max-height: 400px;
-    object-fit: cover;
+    /* min-width: 300px;
+    max-width: 800px;
+    min-height: 100px;
+    max-height: 400px; */
+    /* object-fit: cover;
     background-size: cover;
-    background-position: center;
+    background-position: center; */
 }
 
 .main-image img{
     width: 100%;
     height: 100%;
+    max-width: 1200px;
     object-fit: cover;
     background-size: cover;
     background-position: center;
@@ -222,11 +237,12 @@
 }
 
 /* Actions/Forms */
-.view-body .view-actions{
+.top-contents .view-actions{
     gap: 16px;
     width: 100%;
     padding: 32px;
     display: flex;
+    max-width: 400px;
     position: relative;
     border-radius: 8px;
     flex-direction: column;
@@ -243,3 +259,4 @@
 .view-actions button{
     width: 100%;
 }
+

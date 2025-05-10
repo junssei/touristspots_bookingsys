@@ -5,7 +5,6 @@
 {% block content %}
 <div class="view-section section">
     <div class="view-header">
-        <a href="{% url 'touristspots' %}" class="back-btn delt"><img src="{% static 'icon/action-icons=back.svg' %}"> Back </a>
         <div>
             <h1 class="header">
                 Booking {{ title }} #{{booking.id}}
@@ -55,7 +54,11 @@
                     {{ form.paymentMethod }}
                 </div>
             </div>
-            <input type="submit" name="pay" class="button button-clrbackground" value="Pay">
+            <div class="input-group-actions">
+                <input type="submit" name="pay" class="button button-clrbackground" value="Pay">
+                <input type="submit" name="paylater" class="button button-clrbackground button-blue" value="Pay Later">
+                <input type="submit" name="cancelpayment" class="button button-clrbackground button-red" value="Cancel">
+            </div>
         </form>
     </div>
 </div>

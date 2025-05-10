@@ -58,7 +58,31 @@ def view_touristspot(request, id):
         totalcost = 0
         if 'confirm_book' in request.POST:
             if 'visitDate' in request.POST and 'numberOfPeople' in request.POST:
+                existing_booking = BookingLine.objects.filter(
+                    booking__user=request.user,
+                    visitDate=request.POST.get('visitDate')
+                ).exists()
+
+                if existing_booking:
+                    messages.error(request, "You already have a booking on this date")
+                    return redirect('view_touristspot', id)
                 
+                if int(request.POST.get('numberOfPeople')) > 10:
+                    messages.error(request, "Number of people exceeds the limit")
+                    return redirect('view_touristspot', id)
+                
+                if int(request.POST.get('numberOfPeople')) < 1:
+                    messages.error(request, "Number of people must be at least 1")
+                    return redirect('view_touristspot', id)
+                
+                if request.POST.get('visitDate') < datetime.date.today().strftime('%Y-%m-%d'):
+                    messages.error(request, "Visit date cannot be in the past")
+                    return redirect('view_touristspot', id)
+                
+                if request.POST.get('visitDate') > (datetime.date.today() + datetime.timedelta(days=365)).strftime('%Y-%m-%d'):
+                    messages.error(request, "Visit date cannot be more than 1 year in the future")
+                    return redirect('view_touristspot', id)
+
                 booking = Booking()
                 booking.user = request.user
                 booking.save()
@@ -100,21 +124,35 @@ def book_payment(request, id):
     bookingline = BookingLine.objects.get(booking=booking)
     spot = TouristSpot.objects.get(id=bookingline.spot.id)
     if request.method == 'POST':
-        if 'paymentMethod' in request.POST:
+        if 'pay' in request.POST:
             payment = Payment()
             payment.booking = booking
             payment.amount = booking.totalcost
             payment.paymentMethod = request.POST.get('paymentMethod')
-            payment.status = "Paid"
+            payment.status = 'S'
             payment.save()
 
             messages.success(request, "Payment successful!")
             return redirect('user_booking', request.user.id)
-        else:
-            messages.error(request, "Error processing payment. Please try again.")
-            return redirect('payment', id)
-    
-    paymentform = PaymentForm()
+        
+        if 'cancelpayment' in request.POST:
+            bookingline.delete()
+            booking.delete()
+            messages.success(request, "Booking cancelled successfully!")
+            return redirect('user_booking', request.user.id)
+            
+        if 'paylater' in request.POST:
+            payment = Payment()
+            payment.booking = booking
+            payment.amount = booking.totalcost
+            payment.paymentMethod = request.POST.get('paymentMethod')
+            payment.status = 'NP'
+            payment.save()
+
+            messages.success(request, "Pay Later!")
+            return redirect('user_booking', request.user.id)
+    else:
+        paymentform = PaymentForm()
     context = {
         'form': paymentform,
         

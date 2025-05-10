@@ -8,8 +8,9 @@
     <title> {% block title %} {% endblock %} </title>
     {% block stylesheets %} {% endblock %}
     <link rel="stylesheet" href="{% static 'main.css' %}">
-    <link rel="stylesheet" href="{% static 'main-responsive.css' %}">
     <link rel="stylesheet" href="{% static 'touristspot.css' %}">
+    <link rel="stylesheet" href="{% static 'main-responsive.css' %}">
+    <link rel="icon" href="{% static 'logo/icon.svg' %}" type="image/gif" sizes="16x16">
 </head>
 <body>
     {% include 'message.html' %}

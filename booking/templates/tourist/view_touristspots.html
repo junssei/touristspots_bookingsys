@@ -18,23 +18,54 @@
     </div>
     <div class="view-body">
         <div class="view-content">
-            <div class="content-image">
-                <div class="main-image">
-                    {% if list.image.url != null %}
-                        <img src="{{ list.image.url }}" class="image" alt="image-card">
+            <div class="top-contents">
+                <div class="view-details">
+                    <div class="content-image">
+                        <div class="main-image">
+                            {% if list.image.url != null %}
+                                <img src="{{ list.image.url }}" class="image" alt="image-card">
+                            {% else %}
+                                <img src="/media/spots/default-image.jpeg" class="image" alt="image-card">
+                            {% endif %}
+                        </div>
+                        <div class="sub-images">
+                            {% for z in gallery %}
+                                <img src="{{ z.image.url }}" class="image" alt="image-card">
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="content-description">
+                        <h2> Description </h2>
+                        <p> {{list.description}} </p>
+                    </div>
+                </div>
+                <form class="view-actions" action="" method="post">
+                    {% if not user.is_authenticated %}
+                    <p style="text-align: center; width: 100%; font-size: 16px; color: var(--gray);"> Required to Log In to Book. </p>
                     {% else %}
-                        <img src="/media/spots/default-image.jpeg" class="image" alt="image-card">
+                    {% csrf_token %}
+                    <p> Entrance Fee: ₱<span>{{ list.entrancefee }}</span></p>
+                    <div class="input-group">
+                        <label for=""> Date </label>
+                        <div class="input-container">
+                            {{ bookingline.visitDate }}
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for=""> Number of Guest </label>
+                        <div class="input-container">
+                            {{ bookingline.numberOfPeople }}
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for=""> Total Price </label>
+                        <div class="input-container">
+                            <p> ₱<span id="totalPrice"> {{ list.entrancefee }} </span></p>
+                        </div>
+                    </div>
+                    <input type="submit" name="confirm_book" class="button button-clrbackground" value="Book Now">
                     {% endif %}
-                </div>
-                <div class="sub-images">
-                    {% for z in gallery %}
-                        <img src="{{ z.image.url }}" class="image" alt="image-card">
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="content-description">
-                <h2> Description </h2>
-                <p> {{list.description}} </p>
+                </form>
             </div>
             <div class="content-reviews">
                 <h2> Reviews </h2>
@@ -81,34 +112,6 @@
                 </div>
             </div>
         </div>
-        
-        <form class="view-actions" action="" method="post">
-            {% if not user.is_authenticated %}
-            <p style="text-align: center; width: 100%; font-size: 16px; color: var(--gray);"> Required to Log In to Book. </p>
-            {% else %}
-            {% csrf_token %}
-            <p> Entrance Fee: ₱<span>{{ list.entrancefee }}</span></p>
-            <div class="input-group">
-                <label for=""> Date </label>
-                <div class="input-container">
-                    {{ bookingline.visitDate }}
-                </div>
-            </div>
-            <div class="input-group">
-                <label for=""> Number of Guest </label>
-                <div class="input-container">
-                    {{ bookingline.numberOfPeople }}
-                </div>
-            </div>
-            <div class="input-group">
-                <label for=""> Total Price </label>
-                <div class="input-container">
-                    <p> ₱<span id="totalPrice"> {{ list.entrancefee }} </span></p>
-                </div>
-            </div>
-            <input type="submit" name="confirm_book" class="button button-clrbackground" value="Book Now">
-            {% endif %}
-        </form>
     </div>
 </div>
 {% endblock %}

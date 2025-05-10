@@ -19,9 +19,9 @@ urlpatterns = [
     
     # User Booking
     path('accounts/<int:id>/booking', views.user_booking, name='user_booking'),
-    path('accounts/<int:id>/booking/view', views.view_booking, name='view_booking'),
-    path('accounts/<int:id>/booking/edit', views.edit_booking, name='edit_booking'),
-    path('accounts/<int:id>/booking/cancel', views.delete_booking, name='delete_booking'),
+    path('accounts/<int:id>/booking/view', views.view_booking, name='user_view_booking'),
+    path('accounts/<int:id>/booking/edit', views.edit_booking, name='user_edit_booking'),
+    path('accounts/<int:id>/booking/cancel', views.delete_booking, name='user_delete_booking'),
 
     # Admin Page
     path('ts-admin', adminViews.admin_dashboard, name='admin_dashboard'),
@@ -55,6 +55,8 @@ urlpatterns = [
     path('ts-admin/booking/<int:id>/edit', adminViews.booking_edit, name='edit_booking'),
     path('ts-admin/booking/<int:id>/delete', adminViews.booking_delete, name='delete_booking'),
 
+    path('ts-admin/booking/<int:id>/approve', adminViews.booking_view, name='approve_booking'),
+    
     # Admin - Gallery
     path('ts-admin/gallery/', adminViews.gallery, name='gallery'),
     path('ts-admin/gallery/add', adminViews.add_gallery, name='add_gallery'),
